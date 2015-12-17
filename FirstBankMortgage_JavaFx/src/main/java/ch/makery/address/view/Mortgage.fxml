@@ -5,16 +5,56 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="363.0" prefWidth="693.0" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.MortgageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.makery.address.view.MortgageController">
    <children>
-      <SplitPane dividerPositions="0.4126984126984127" layoutX="153.0" layoutY="70.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.25217391304347825" layoutX="325.0" layoutY="150.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="310.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="116.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="310.0" prefWidth="200.0">
                <children>
+                  <GridPane layoutX="15.0" layoutY="17.0" minWidth="-Infinity" prefHeight="275.0" prefWidth="170.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="140.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="txtIncome" GridPane.rowIndex="1" />
+                        <TextField fx:id="txtExpenses" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtCreditScore" GridPane.rowIndex="5" />
+                        <Label fx:id="IncomeLabel" text="Income" />
+                        <Label fx:id="ExpensesLabel" text="Expenses" GridPane.rowIndex="2" />
+                        <Label fx:id="CreditScoreLabel" text="Credit Score" GridPane.rowIndex="4" />
+                     </children>
+                  </GridPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" >
+          <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="360.0" prefWidth="600.0">
                <children>
+                  <GridPane layoutX="14.0" layoutY="14.0" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="153.0" prefWidth="554.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="44.0" minHeight="-Infinity" prefHeight="44.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="3.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="25.0" minHeight="0.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <ComboBox fx:id="cmbTerm" prefHeight="30.0" prefWidth="200.0" GridPane.rowIndex="3" />
+                        <TextField fx:id="txtHouseCost" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="200.0" GridPane.rowIndex="1" />
+                        <Label fx:id="HousePriceLabel" text="Label" />
+                        <Label fx:id="termLabel" text="Label" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Button fx:id="SubmitButton" layoutX="378.0" layoutY="115.0" mnemonicParsing="false" onAction="#onPress" text="Submit" />
+                  <Label fx:id="MortgagePaymentLabel" layoutX="14.0" layoutY="214.0" text="Label" />
                </children>
             </AnchorPane>
         </items>

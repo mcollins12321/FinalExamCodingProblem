@@ -14,7 +14,7 @@ import util.HibernateUtil;
 public class RateDAL {
 
 
-	public static double getRate(int GivenCreditScore) {
+	public static double getRate(int i) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction tx = null;
 		RateDomainModel rateGet = null;
@@ -22,7 +22,7 @@ public class RateDAL {
 		try {
 			tx = session.beginTransaction();
 			
-			String search = "From RateDomainModel where MinCreditScore <=" + GivenCreditScore;
+			String search = "From RateDomainModel where MinCreditScore <=" + i;
 			Query query = session.createQuery(search);
 			List<?> rates = query.list();
 			if(rates.isEmpty()==false) {
