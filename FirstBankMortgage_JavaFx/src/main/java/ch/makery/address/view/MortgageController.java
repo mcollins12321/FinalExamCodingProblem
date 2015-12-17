@@ -32,7 +32,8 @@ public class MortgageController {
 	private Label MortgagePaymentLabel = new Label();
 	@FXML
 	private Label termLabel = new Label();
-	
+	@FXML
+	private Label waitLabel = new Label();
 	@FXML
 	private ComboBox<String> cmbTerm;
 	@FXML
@@ -69,22 +70,23 @@ public class MortgageController {
     	ExpensesLabel.setText("Monthly Expenses");
     	ExpensesLabel.setVisible(true);
     	CreditScoreLabel.setText("Credit Score");
-    	HousePriceLabel.setText("Please enter the exptected price of your home and a repayment term");
+    	HousePriceLabel.setText("Please enter the expected price of your home");
     	HousePriceLabel.setVisible(true);
     	ObservableList<String> terms = FXCollections.observableArrayList("15 Years","30 Years");
     	cmbTerm.setItems(terms);
     	MortgagePaymentLabel.setVisible(false);
     	termLabel.setText("Do you want a 15 year or 30 year mortgage?");
     	termLabel.setVisible(true);
+    	waitLabel.setVisible(false);
     }
     
     private void calculateMort() {
     	 Double income = Double.parseDouble(this.txtIncome.getText());
     	 int intIncome = income.intValue();
          Double expenses = Double.parseDouble(this.txtExpenses.getText());
-         int intExpenses = expenses.intValue();
-         int creditScore = Integer.parseInt(this.txtCreditScore.getText());
-         //int intCreditScore = creditScore.intValue();
+         int intExpenses = expenses.intValue()*12;
+         int creditScor = Integer.parseInt(this.txtCreditScore.getText());
+         //int intCreditScor = creditScor.intValue();
          Double houseCost = Double.parseDouble(this.txtHouseCost.getText());
          int intHouseCost = houseCost.intValue();
          int terms = 0;
@@ -93,24 +95,32 @@ public class MortgageController {
          }
          else if(this.cmbTerm.getSelectionModel().getSelectedIndex() == 1){
          	terms = 30;
-         double monthlyMort = ((Rate.getPayment(creditScore, intHouseCost, terms)));
-         
-         if(monthlyMort <= income * 0.36 && monthlyMort <= (income + (expenses * 2)) * 0.28) {
-     		DecimalFormat df = new DecimalFormat("#.##");
-     		String fMortgage = df.format(monthlyMort);
-     		MortgagePaymentLabel.setText("Your monthly mortgage payments will be $" + monthlyMort);
          }
          else {
-        	 MortgagePaymentLabel.setText("Your monthly mortgage payments will be $" + monthlyMort + ", but unfortunately you do not qualify for this loan.");
+        	 waitLabel.setText("Please fill out all the required information");
+        	 waitLabel.setVisible(true);
+        	 calculateMort();
          }
-         MortgagePaymentLabel.setVisible(true);
+         double monthlyMort = ((Rate.getPayment(creditScor, intHouseCost, terms)*100))/100;
+         DecimalFormat df = new DecimalFormat("#.00");
+  		 String fMort = df.format(monthlyMort);
+         if((monthlyMort <= ((intIncome * 0.36)*100)/1200) && (monthlyMort <= ((((intIncome + intExpenses) * 0.18)*100)/1200))) {
+        	//waitLabel.setVisible(false);
+     		MortgagePaymentLabel.setText("Your monthly mortgage payments will be $" + fMort);
+     		MortgagePaymentLabel.setVisible(true);
+         }
+         else {
+        	 //waitLabel.setVisible(false);
+        	 MortgagePaymentLabel.setText("Your monthly mortgage payments will be $" + fMort + 
+        			 ",\nbut unfortunately you do not qualify for this loan.");
+        	 MortgagePaymentLabel.setVisible(true);
+         }
          }
          
-    }
     @FXML
     private void onPress() {
-    	MortgagePaymentLabel.setText("Thank you, we are now determining your monthly mortgage payments..."); 
-    	MortgagePaymentLabel.setVisible(true);
+    	waitLabel.setText("Thank you, we are now determining your monthly mortgage payments..."); 
+   	 	waitLabel.setVisible(true);
     	calculateMort();
     }
 

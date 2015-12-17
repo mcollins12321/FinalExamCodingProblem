@@ -6,10 +6,10 @@ import org.apache.poi.ss.formula.functions.FinanceLib;
 
 public class Rate extends RateDomainModel {
 	
-	public static double getPayment(int creditScore, int houseCost, int loanValue)
+	public static double getPayment(int creditScore, int houseCost, int term)
 	{
-		double interestRate = RateDAL.getRate(houseCost);
-		double paymentM = -1*FinanceLib.pmt(interestRate/12, creditScore*12, loanValue, 0, true);
+		double interestRate = RateDAL.getRate(creditScore);
+		double paymentM = -1*FinanceLib.pmt(interestRate/1200, term*12, houseCost, 0, false);
 		//FinalExam
 		//	Normally this kind of method would be in a BLL, but alas...
 		
