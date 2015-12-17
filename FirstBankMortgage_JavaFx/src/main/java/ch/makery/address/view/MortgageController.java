@@ -119,8 +119,6 @@ public class MortgageController {
          
     @FXML
     private void onPress() {
-    	waitLabel.setText("Thank you, we are now determining your monthly mortgage payments..."); 
-   	 	waitLabel.setVisible(true);
     	calculateMort();
     }
 
